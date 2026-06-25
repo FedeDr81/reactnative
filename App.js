@@ -1,11 +1,19 @@
-import { StatusBar, SafeAreaView} from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import ParteArribaLogin from './componentes/parteArribaLogin/parteArribalogin';
-import CampoEmail from './componentes/camposLogin/campoEmail';
-import CampoPass from './componentes/camposLogin/CampoPass';
-import styles from './styles/styles';
+import React, { useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
+// 2. Alert y SafeAreaView se importan de react-native
+import { StyleSheet, Text, View, SafeAreaView, Alert } from 'react-native';
+
+import ParteArribaLogin from './componentes/parteArribaLogin/parteArribalogin.js';
+// 3. Corregida la "F" mayúscula del archivo Formulario
+import Formulario from './componentes/camposLogin/formulario.js';
+import ImagenLogin from './componentes/imagenLogin/imagenLogin.js';
+// 4. Corregida la "b" minúscula de la carpeta botonIngreso
+import BotonIngreso from './componentes/botonIngreso/BotonIngreso.js';
 
 export default function App() {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const manejarLogin = () => {
     const emailValido = 'fede@ejemplo.com';
@@ -21,11 +29,15 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <ParteArribaLogin/>
-      <Logo />
-      <CampoEmail/>
-      <CampoPass/>
+      <ImagenLogin/>
+      <Formulario 
+        email={email} 
+        setEmail={setEmail} 
+        password={password} 
+        setPassword={setPassword} 
+      />
       <BotonIngreso 
-        onPress={() => alert('¡Hiciste click en Ingresar!')} 
+        onPress={manejarLogin()} 
       />
     </SafeAreaView>
   );
